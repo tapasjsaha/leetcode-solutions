@@ -1,0 +1,5 @@
+#Rising Temperature
+#/* Write your PL/SQL query statement below */
+#SELECT W2.ID FROM WEATHER W1, WEATHER W2
+#WHERE W1.RECORDDATE = W2.RECORDDATE - 1
+#AND W1.TEMPERATURE < W2.TEMPERATURE
