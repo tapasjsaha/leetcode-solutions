@@ -1,24 +1,19 @@
 # Backspace String Compare
 class Solution:
     def backspaceCompare(self, s, t):
-        ls, lt = [], []
-        for ch in s:
-            if ch != '#':
-                ls.append(ch)
-            else:
-                try:
-                    ls.pop()
-                except IndexError:
-                    pass
-        for ch in t:
-            if ch != '#':
-                lt.append(ch)
-            else:
-                try:
-                    lt.pop()
-                except IndexError:
-                    pass
-        return ls == lt
+        def getString(st):
+            lst = []
+            for ch in st:
+                if ch != '#':
+                    lst.append(ch)
+                else:
+                    try:
+                        lst.pop()
+                    except IndexError:
+                        pass
+            return lst
+
+        return getString(s) == getString(t)
 
 
 s = Solution()
