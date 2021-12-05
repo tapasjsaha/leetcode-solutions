@@ -1,16 +1,26 @@
 #Climbing Stairs
 class Solution:
     def climbStairs(self, n: int) -> int:
-        if n == 1:
-            return 1
-        elif n == 2:
-            return 2
-        else:
-            prev = 1
-            curr = 2
-            for i in range(n-2):
-                prev, curr = curr, prev + curr
-            return curr
+        cache = {1: 1, 2: 2}
+
+        def rec_climb(N):
+            if N not in cache:
+                cache[N] = rec_climb(N-1) + rec_climb(N-2)
+            return cache[N]
+
+        return rec_climb(n)
+
+#        def climbStairs(self, n: int) -> int:
+#            if n == 1:
+#                return 1
+#            elif n == 2:
+#                return 2
+#            else:
+#                prev = 1
+#                curr = 2
+#                for i in range(n - 2):
+#                    prev, curr = curr, prev + curr
+#                return curr
 
 # TIME LIMIT EXCEEDED
 #       if n == 1:

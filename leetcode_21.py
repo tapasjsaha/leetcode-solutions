@@ -33,26 +33,22 @@ def printList(head):
 
 class Solution:
     def mergeTwoLists(self, l1: [ListNode], l2: [ListNode]) -> [ListNode]:
-        head = ListNode()
-        temp = head
-        while True:
-            if not l1 and not l2:
-                break
-            elif not l1 and l2:
-                head.next = l2
-                break
-            elif l1 and not l2:
-                head.next = l1
-                break
+        temp = ListNode()
+
+        if not l1 and not l2:
+            return None
+        elif not l1 and l2:
+            temp = l2
+        elif l1 and not l2:
+            temp = l1
+        else:
+            if l1.val < l2.val:
+                temp.val = l1.val
+                temp.next = self.mergeTwoLists(l1.next, l2)
             else:
-                if l1.val < l2.val:
-                    head.next = l1
-                    l1 = l1.next
-                else:
-                    head.next = l2
-                    l2 = l2.next
-                head = head.next
-        return temp.next
+                temp.val = l2.val
+                temp.next = self.mergeTwoLists(l1, l2.next)
+        return temp
 
 
 l1 = createLLFromList([1, 2, 4, 6])
@@ -92,3 +88,26 @@ printList(l2)
 s = Solution()
 head1 = s.mergeTwoLists(l1, l2)
 printList(head1) if head1 is not None else print("List is empty")
+
+
+# def mergeTwoLists(self, l1: [ListNode], l2: [ListNode]) -> [ListNode]:
+#     head = ListNode()
+#     temp = head
+#     while True:
+#         if not l1 and not l2:
+#             break
+#         elif not l1 and l2:
+#             head.next = l2
+#             break
+#         elif l1 and not l2:
+#             head.next = l1
+#             break
+#         else:
+#             if l1.val < l2.val:
+#                 head.next = l1
+#                 l1 = l1.next
+#             else:
+#                 head.next = l2
+#                 l2 = l2.next
+#             head = head.next
+#     return temp.next

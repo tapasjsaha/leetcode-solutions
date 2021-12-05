@@ -1,4 +1,4 @@
-# Path Sum
+# Path Sum II
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -34,20 +34,16 @@ class TreeNode:
             return root
 
 
-# Path Sum
+# Path Sum II
 class Solution:
-    def hasPathSum(self, root: [TreeNode], targetSum: int) -> bool:
+    def pathSum(self, root: [TreeNode], targetSum: int) -> bool:
         res = []
-        global finished
-        finished = False
 
         def backtrack(node, current):
             if node and not node.left and not node.right:
                 current.append(node.val)
                 if sum(current) == targetSum:
-                    globals()['finished'] = True
                     res.append(current)
-                    return True
                 else:
                     return
             else:
@@ -58,59 +54,44 @@ class Solution:
                     candidate_list.append(node.right)
                 for candidate in candidate_list:
                     backtrack(candidate, current + [node.val])
-                    if globals()['finished']:
-                        return
 
         if not root:
-            return False
+            return res
         else:
             backtrack(root, [])
 
-        return False if not res else True
-
+        return res
 
 
 T = TreeNode()
-root = T.buildFromList([1, 2, 3])
+root = T.buildFromList([5, 4, 8, 11, 'null', 13, 4, 7, 2, 'null', 'null', 5, 1])
 s = Solution()
-print(s.hasPathSum(root, targetSum=3))
+print(s.pathSum(root, targetSum=22))
 
 T = TreeNode()
 root = T.buildFromList([5, 4, 8, 11, 'null', 13, 4, 7, 2, 'null', 'null', 'null', 1])
 s = Solution()
-print(s.hasPathSum(root, targetSum=22))
+print(s.pathSum(root, targetSum=22))
 
-print(s.hasPathSum(root, targetSum=26))
+print(s.pathSum(root, targetSum=26))
 
-print(s.hasPathSum(root, targetSum=27))
+print(s.pathSum(root, targetSum=27))
 
-print(s.hasPathSum(root, targetSum=18))
+print(s.pathSum(root, targetSum=18))
 
-print(s.hasPathSum(root, targetSum=11))
+print(s.pathSum(root, targetSum=11))
 
 T = TreeNode()
 root = T.buildFromList([1, 2, 3])
 s = Solution()
-print(s.hasPathSum(root, targetSum=5))
+print(s.pathSum(root, targetSum=5))
 
 T = TreeNode()
 root = T.buildFromList([1, 2])
 s = Solution()
-print(s.hasPathSum(root, targetSum=0))
+print(s.pathSum(root, targetSum=0))
 
 T = TreeNode()
 root = T.buildFromList([])
 s = Solution()
-print(s.hasPathSum(root, targetSum=5))
-
-
-# def hasPathSum(self, root: [TreeNode], targetSum: int) -> bool:
-#     if not root:
-#         return False
-#     elif root and not root.left and not root.right:
-#         if root.val == targetSum:
-#             return True
-#         else:
-#             return False
-#     else:
-#         return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
+print(s.pathSum(root, targetSum=5))
