@@ -5,19 +5,16 @@ class Solution:
         if len(st) != len(pattern):
             return False
         else:
-            d_pattern, dst = {}, {}
+            d_pattern = {}
             for i in range(len(pattern)):
-                if pattern[i] not in d_pattern:
-                    if st[i] not in dst:
-                        d_pattern[pattern[i]] = st[i]
-                        dst[st[i]] = pattern[i]
-                    else:
+                if pattern[i] in d_pattern:
+                    if d_pattern[pattern[i]] != st[i]:
                         return False
                 else:
-                    if d_pattern[pattern[i]] == st[i] and dst[st[i]] == pattern[i]:
-                        continue
-                    else:
+                    if st[i] in d_pattern.values():
                         return False
+                    else:
+                        d_pattern[pattern[i]] = st[i]
             return True
 
 
