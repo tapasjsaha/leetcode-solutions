@@ -34,40 +34,51 @@ class TreeNode:
             return root
 
 
+# # Path Sum
+# class Solution:
+#     def hasPathSum(self, root: [TreeNode], targetSum: int) -> bool:
+#         res = []
+#         global finished
+#         finished = False
+#
+#         def backtrack(node, current):
+#             if node and not node.left and not node.right:
+#                 current.append(node.val)
+#                 if sum(current) == targetSum:
+#                     globals()['finished'] = True
+#                     res.append(current)
+#                     return True
+#                 else:
+#                     return
+#             else:
+#                 candidate_list = []
+#                 if node.left:
+#                     candidate_list.append(node.left)
+#                 if node.right:
+#                     candidate_list.append(node.right)
+#                 for candidate in candidate_list:
+#                     backtrack(candidate, current + [node.val])
+#                     if globals()['finished']:
+#                         return
+#
+#         if not root:
+#             return False
+#         else:
+#             backtrack(root, [])
+#
+#         return False if not res else True
+
 # Path Sum
 class Solution:
     def hasPathSum(self, root: [TreeNode], targetSum: int) -> bool:
-        res = []
-        global finished
-        finished = False
-
-        def backtrack(node, current):
-            if node and not node.left and not node.right:
-                current.append(node.val)
-                if sum(current) == targetSum:
-                    globals()['finished'] = True
-                    res.append(current)
-                    return True
-                else:
-                    return
-            else:
-                candidate_list = []
-                if node.left:
-                    candidate_list.append(node.left)
-                if node.right:
-                    candidate_list.append(node.right)
-                for candidate in candidate_list:
-                    backtrack(candidate, current + [node.val])
-                    if globals()['finished']:
-                        return
-
-        if not root:
-            return False
+        if root and not root.right and not root.left and root.val == targetSum:
+            return True
+        elif root and root.right and self.hasPathSum(root.right, targetSum-root.val):
+            return True
+        elif root and root.left and self.hasPathSum(root.left, targetSum-root.val):
+            return True
         else:
-            backtrack(root, [])
-
-        return False if not res else True
-
+            return False
 
 
 T = TreeNode()
